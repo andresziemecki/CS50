@@ -1,0 +1,132 @@
+MP, GIF, JPEG, and PNG file formats
+
+0.  How many different colors does each format support?
+
+    BMP: 32, 24 bits (22.7 millones de clores) - 8 bits (256 colores) - y menos
+    GIF: puede tener entre 2 y 256 colores
+    JPEG: El soporte de color verdadero (24 bits) de JPEG nos ofrece la posibilidad de ofrecer imágenes con una profundidad de 16.777.216 colores.
+    PNG: El formato PNG permite almacenar imágenes en blanco y negro (una profundidad de color de 16 bits por píxel)
+         y en color real (una profundidad de color de 48 bits por píxel), así como también imágenes indexadas, utilizando una paleta de 256 colores.
+         Además, soporta la transparencia de canal alfa, es decir, la posibilidad de definir 256 niveles de transparencia.
+         
+1.  Which of the formats supports animation?
+
+    Only GIF support animation.
+    
+2.  What’s the difference between lossy and lossless compression?
+
+    Lossless and lossy compression are terms that describe whether or not, in the compression of a file,
+    all original data can be recovered when the file is uncompressed. 
+    
+    With lossless compression, every single bit of data that was originally in the file remains after the file is uncompressed. 
+    All of the information is completely restored.
+    
+    On the other hand, lossy compression reduces a file by permanently eliminating certain information, especially redundant information. 
+    When the file is uncompressed, only a part of the original information is still there (although the user may not notice it). 
+    Lossy compression is generally used for video and sound, where a certain amount of information loss will not be detected by most users.
+
+3.  Which of these formats is lossy-compressed?
+
+    Everyone exept PNG
+    
+4.  What happens, technically speaking, when a file is deleted on a FAT file system?
+
+    When the operating system erases a FAT file, two
+    things occur. First, the system modifies the filename’s first
+    character in the file’s directory entry to signal that the file
+    has been deleted and that the directory entry can be recycled.
+    Second, the system moves all of the file’s FAT clusters
+    to the hard drive’s list of free clusters. The actual file
+    data is never touched.
+    
+5.  What can someone like you do to ensure (with high probability) that files you delete cannot be recovered?
+
+    Because physical destruction is relatively complicated and
+    unsatisfying, and because using the operating system to
+    erase files does not effectively sanitize them, many individuals
+    prefer to sanitize hard-drive information by intentionally
+    overwriting that data with other data so that the
+    original data cannot be recovered. Although overwriting
+    is relatively easy to understand and to verify, it can be
+    somewhat complicated in practice.
+    
+6.  What’s stdint.h?
+
+    stdint.h is a header file in the C standard library, allow programmers to write more portable code
+    by providing a set of typedefs that specify exact-width integer types,
+    together with the defined minimum and maximum allowable values for each type, using macros.
+    This header is particularly useful for embedded programming
+    which often involves considerable manipulation of hardware specific I/O registers requiring integer data of fixed widths,
+    specific locations and exact alignments
+    int8_t	  Signed  	8bits   1byte //positive and negative
+    uint8_t	  Unsigned	8bits	1byte //only positive (more positive numbers than "signed")
+    int16_t	  Signed	16bits	2bytes
+    uint16_t  Unsigned	16bits	2bytes
+    int32_t   Signed	32bits	4bytes
+    uint32_t  Unsigned	32bits	4bytes
+    int64_t	  Signed	64bit	8bytes	
+    uint64_t  Unsigned	64bits	8bytes
+    
+7.  What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+
+    To declare integrer of that quantity of bits.
+
+8.  How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+
+    BYTE: 8 bits (1 byte), all positive.
+    DWORD: 32 bits (4 bytes), all positive.
+    LONG: 32 bits (4 bytes), positive and negative.
+    WORD: 16 bits (2 bytes), all positive.
+    
+9.  What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be?
+    (Leading bytes used to identify file formats (with high probability) are generally called "magic numbers.)"
+    
+    The first two byte is a WORD type of integrer and is the kind of archive that we are executing
+    
+10. What’s the difference between bfSize and biSize?
+
+    Both have the same size of DWORD. But bfsize is in the BitmapFileheader and bisize is in the BitmapInfoheader.
+    
+11. What does it mean if biHeight is negative?
+
+    It does mean that the image in construct from bottom to up, and the first pixel is the bottom-left.
+    
+12. What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+
+    BfOffBits.
+    
+13. Why might fopen return NULL in copy.c:37?
+
+    Because we have to check if it was succesfuly opened
+    
+14. Why is the third argument to fread always 1 in our code?
+
+    size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
+    ptr − This is the pointer to a block of memory with a minimum size of size*nmemb bytes.
+    size − This is the size in bytes of each element to be read.
+    nmemb − This is the number of elements, each one with a size of size bytes.
+    stream − This is the pointer to a FILE object that specifies an input stream.
+    :::size_t size, size_t nmemb:::
+    They're different because fread() returns the number of data elements it was able to read, not the number of bytes.
+    So is always 1 because fread return a value of 1 becaue of 1 element readen,
+    
+15. What value does copy.c:70 assign padding if bi.biWidth is 3?
+
+    It will be 1.
+
+16. What does fseek do?
+
+    Desplaza la posición actual de lectura/escritura del fichero a otro punto.
+    El desplazamiento puede ser positivo (avanzar), cero o negativo (retroceder).
+    La posición de origen se puede indicar con la ayuda de tres constantes: 
+    SEEK_SET (0, comienzo), SEEK_CUR (1, actual), SEEK_END (2, final)
+    Ejemplo de uso:
+    int fseek (FILE* fichero, long desplazamiento, int desde);
+
+17. What is SEEK_CUR?
+
+    CUR: Current, the actual position.
+    
+18. Whodunit?
+
+    Rick Astley

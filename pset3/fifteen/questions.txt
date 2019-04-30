@@ -1,0 +1,9 @@
+questions.txt
+
+Computer Science 50
+Problem Set 3
+
+0. from 3x3 till 9x9
+1. With int and chars
+2. The greet() function
+3. Init() , draw(), move() and won()

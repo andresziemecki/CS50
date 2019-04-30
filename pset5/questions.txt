@@ -1,0 +1,72 @@
+0.  What is pneumonoultramicroscopicsilicovolcanoconiosis?
+
+    El término utilizado para referirse a la enfermedad pulmonar producida por la intoxicación de sílice
+    
+1.  According to its man page, what does getrusage do?
+
+    getrusage() returns resource usage measures for "who", which can be one of the following:
+
+       RUSAGE_SELF
+              Return resource usage statistics for the calling process, which is the sum of resources used by all threads in the process.
+
+       RUSAGE_CHILDREN
+              Return  resource  usage  statistics for all children of the calling process that have terminated and been waited for.  These statistics will
+              include the resources used by grandchildren, and further removed descendants, 
+              if all of the intervening descendants waited on  their  termi‐ nated children.
+
+       RUSAGE_THREAD (since Linux 2.6.26)
+              Return resource usage statistics for the calling thread.
+              
+2.  Per that same man page, how many members are in a variable of type struct rusage?
+
+    The <sys/resource.h> header shall define the rusage structure that includes at least the following members:
+
+    struct timeval ru_utime  User time used. 
+    struct timeval ru_stime  System time used. 
+    
+3.  Why do you think we pass before and after by reference (instead of by value) to calculate, even though we’re not changing their contents?
+
+    Because the contents are changing by time, it's like a chronometer. And this chronometer starts when we run the program. 
+    So we need to measure twice the time of the chronometer and do the rest to know how much time it took that function.
+    
+4.  Explain as precisely as possible, in a paragraph or more, how "main" goes about reading words from a file.
+    In other words, convince us that you indeed understand how that function’s for loop works.
+    
+    It gets char all the time and put it in array of 45 characters + 1 (\0).
+    If every char was an alphabetical letter and the end of the word is marked with something like /n,
+    the word is saved and checked if is it in the dictionary
+    If one char is not an alphabetical and is digit, the string is not  word, and it's noseved and unchecked
+    
+5.  Why do you think we used fgetc to read each word’s characters one at a time rather than use fscanf with a format string like "%s" 
+    to read whole words at a time? Put another way, what problems might arise by relying on fscanf alone?
+    
+    Because with scanf we don't know how many chars the string is going to be. And when we read this 45 char we have to scan
+    each character to find when the word ends or if is it a word or no. Also we need a pointer to point each time that we are executing scanf.
+    
+6.  Why do you think we declared the parameters for check and load as const?
+
+    const char* name; // we can't change the name but we can change the pointer
+    char * const name; // this create a constant pointer
+
+    Because we don't have to change anything inside de word to check if is it in the dictionary or not. 
+    And about the load, we don't have to change anything inside the dictionary. 
+    So to make sure to don't touch this two things, is better ti put it like a "const".
+    
+7.  What data structure(s) did you use to implement your spell-checker? Be sure not to leave your answer at just "hash table," "trie," or the like.
+    Expound on what’s inside each of your "nodes."
+    
+    I used combination of both of them, tree with hash-table. Each leaf of the tree has 26 blocks of boolean value (to check if the word exist),
+    other 26 for the alphabet(to put one ltter of the word) and 26 pointers to others nodes (to allocate the next word).
+    Every node has the same structure. 
+    
+8.  How slow was your code the first time you got it working correctly?
+    
+    I got 0.11 seconds, also the first time was one of the fastest.
+    
+9.  What kinds of changes, if any, did you make to your code in order to improve its performance?
+
+    No I didn't. I was looking for a formula that it can put a number to each word in the dictionary so to load or check it will be one step.
+    
+10. Do you feel that your code has any bottlenecks that you were not able to chip away at?
+
+    No, I don't feel that. Everything is constant. Maybe the word of 45 characters could be the more botlenecks of all.

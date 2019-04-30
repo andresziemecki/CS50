@@ -1,0 +1,53 @@
+The structs are similiar to an integrer, the most you can do in int type is the most you can do in struct type
+
+An example to input values
+
+typdef struct student 
+{
+    int age;
+    char* name;
+}
+st;
+
+st s2 = {23, "John"};
+
+We can also asign s1 to s2
+
+st s1 = s2;
+
+independiendemente de la definicion de tipo, necesitamos el sigiente identificador a struct si la definicion de struct es recursiva, por ejemplo:
+
+typdef struct node
+{
+    int val;
+    struct node*next; // we have a pointer that apoint to another struct node
+} node;
+
+the previus struct is recursive, is a stuct node that have inside a poiner to a struct node
+
+what about struct in functions? we can have a struct student that we can call it:
+
+void function(st s1);
+
+so we can pass a struct which de function like always
+
+function(s2); 
+
+Or we also do it with pointers, if we want to modify s2 for example. This is usefull too when we want to pass 100 values of a struct,
+so is prefer to not copy all of the values, and get to the values with address that we want to change
+
+void function(st* s1);
+
+function(&s2); 
+
+If we want to create a pointer to a struct
+
+st* s = malloc(sizeof(st));
+
+how we can acces at the ith member of the block of s points to
+
+(*s).age = 4; sin parentesis el asterisco va a tomar todo s.age y no va a compilar
+
+tambien lo podemos hacer de forma mas simple:
+
+s -> age = 4; 

@@ -1,0 +1,46 @@
+Dynamic Memory Allocation
+
+We can use pointers to get acces to a block of dynamically allocate memory at runtime
+
+Prior of this point, all memory we've been working with has been coming from a pool of memory known as the "stack"
+
+Dynamically allocate memory comes from a pool of memory known as the "heap"
+
+malloc(n) function search for a memory if n size and return tu yo a pointer to that memory, if it can't it will give you a NULL pointer
+So if you use malloc you have always always check if the pointer give us back is NULL or not
+
+int* px = malloc(sizeof(int)); this function give us a pointer of the memory that it can take the sieze of the int
+
+//array of floats on the stack:
+    float stack_array[x];
+    
+//array of floats on the heap:
+    float* hipe_array = malloc(x*sizeof(float));
+    
+the bad thing of malloc, is that when the function is over, the malloc doesn't return the memory to the system, so other function can't use
+again that memory, and that's why your system is becaoming slowly. So if you finish the program you need to use free() to return de memory:
+char* word = malloc(50*sizeof(char));
+free(word);
+
+int m;
+int* a;
+Both of this live on the stack and create a "box", the first one is going to save an integrer, and the second one is going to save a poinetr of an integrer
+
+instead
+int* b = malloc(sizeof(int)); (b contain the address of that block of memory)
+This create two boxes, the first one for an int, and the second one a pointer box who point the first box
+It's like the previous example, with the exeption that int* a automatically is going to point int m
+
+a = &m; 
+it's going to give to "a" the address of "m "
+
+a = b;
+remember that "b" is an address, so "a" is going to point the same memory than "b"
+
+m = 10;
+*b = m + 2; 
+where b is pointing, is going to save the value of m plus two = 12
+
+free(b);
+THe piece of memory where is pointing b, is going to be free.
+So if I try to do this *b = 11, some problems I will have because that box of memory be doesn't be able to save an int anymore.

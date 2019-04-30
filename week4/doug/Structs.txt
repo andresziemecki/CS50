@@ -1,0 +1,69 @@
+structures: provide a way to unify several variables of different types into a single, new variable type which can be asigned its own type name.
+So we can group differents element together that ahve a logical connection.
+
+example of very simple structure:
+
+struct car    // struct is the key work that is creating a new datetype here. And car is the name of the structure
+{
+    int year;
+    char model[17];
+    char plate[10];
+    int odometer;
+    double engine_size;
+};
+
+to acces a special type of that structure car we need to se (.), for example: car.year = 2011; car.model = "CS50"; 
+
+//Or another variable declaration on the stack:
+
+struct car *myar = malloc(sizof(struct car));
+
+//field accesing:
+
+(*mycar).year = 2011;       mycar -> year = 2011;
+(*mycar).model = "CS50";    mycar -> model = "CS50";
+
+We can use like this because we dynamic allocated "mycar"
+Short way to do this is with the arrow "->"
+
+Defining Custom Data Types
+Provides a way to create a shorthand or rewritten name for data types
+
+typedef <old name> <new name>;
+for example
+typed unsigned char byte; so you can put byte instead unsigned char;
+typed char* string; in the cs50 library they did this to reeplace char* like a string
+
+Is very usefull typedef in structures, for example:
+
+struct car
+{
+    int year;
+    char model[17];
+    char plate[10];
+    int odometer;
+    double engine_size;
+};
+typedef struct car car_t;
+
+Is so common to use typedef in struct that we can use typedef like following code:
+
+typdef struct car
+{
+    int year;
+    char model[17];
+    char plate[10];
+    int odometer;
+    double engine_size;
+}
+car_t;
+
+so after this we can declare a new variable type car like this
+
+car_t mycar;
+
+and we can acces to each subvariable as the fallowing
+
+mycar.year = 2011;
+mycar.plate = "CS50";
+etc.

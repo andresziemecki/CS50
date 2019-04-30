@@ -1,0 +1,55 @@
+Un puntero es simplemente una dirección, donde tiene un valor (la dirección) y el tipo de valor que se va a guardar ahi (int, char, etc)
+Objetivo: nos permite pasar variables a travéz de funciones
+
+int k;      // habilita una "caja" llamada k con 4 bytes de memoria para guardar un entero
+
+k = 5;      // a la caja k ordena los bits para que se guarde un valor de 5
+
+int* pk;    // se habilita otra "caja" llamada pk donde se podrá guardar una dirección de memoria, donde ésta estará en hexadecimal que se representan 
+            desde el 0 hasta la letra F (16 caracteres) y para saber que es hexadecimal el número comenzará con 0x.
+            
+pk = &k;    // "&" La dirección de k se le asigna a pk. Por lo que en pk se almacenará por ejemplo el siguiente número: 0x80C74820
+
+Un puntero muy simple es el puntero NULL, dode no apunta hacia nada. Y existe porque si se crea un punetro donde no se le asigna una drección inmediatamente
+siemrpe se tiene que apuntar ese puntero a NULL, y peude chequear esto con un if si se hizo correctamente
+
+"&" (ampersand operator) Extract the adress that we already created
+
+if "arr" is an array of doubles, then &arr[i] is a pointer to the ith element of double of that array
+
+"dereferencing" we go to the reference and we change the value there
+
+If we have a pointer-to-char called pc, then *pc is the data that lives at the memory address stored inside the variable pc
+entonces por ejemplo si hacemos *pc = D ahora lo que halla en esa direccion pc se encontrará la letra D.
+
+To declare multiple variables int* we have to do like this: int* px, *py, *pz;
+
+Todos los punteros del sistema tienen 4 o 8 bytes de memoria dependiendo la pc si es 32 bit o 64 bit (char*, int*, float*, double*, long long*, etc)
+
+void swap(int* a, int* b);
+
+Ejemplo de swap para orientarse:
+
+int main(void)
+{
+    int x = 1;
+    int y = 2;
+
+    printf("x is %i\n", x);
+    printf("y is %i\n", y);
+    printf("Swapping...\n");
+    swap(&x, &y);
+    printf("Swapped!\n");
+    printf("x is %i\n", x);
+    printf("y is %i\n", y);
+}
+
+/**
+* Swap arguments' values.
+*/
+void swap(int* a, int* b)
+{
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
